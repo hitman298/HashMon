@@ -94,6 +94,26 @@ app.use(cors({
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true }));
 
+// Root endpoint
+app.get('/', (req, res) => {
+  res.json({ 
+    message: 'HashMon Backend API',
+    status: 'running',
+    version: '1.0.0',
+    endpoints: {
+      health: '/health',
+      api: '/api',
+      battle: '/api/battle',
+      player: '/api/player',
+      hashmon: '/api/hashmon',
+      blockchain: '/api/blockchain',
+      game: '/api/game',
+      nft: '/api/nft'
+    },
+    timestamp: new Date().toISOString()
+  });
+});
+
 // Health check endpoint
 app.get('/health', (req, res) => {
   res.json({ 
@@ -101,6 +121,22 @@ app.get('/health', (req, res) => {
     timestamp: new Date().toISOString(),
     version: '1.0.0',
     network: process.env.NODE_ENV === 'production' ? 'pharos' : 'pharos-testnet'
+  });
+});
+
+// API info endpoint
+app.get('/api', (req, res) => {
+  res.json({
+    message: 'HashMon API',
+    version: '1.0.0',
+    endpoints: {
+      battle: '/api/battle',
+      player: '/api/player',
+      hashmon: '/api/hashmon',
+      blockchain: '/api/blockchain',
+      game: '/api/game',
+      nft: '/api/nft'
+    }
   });
 });
 
@@ -132,7 +168,22 @@ app.use((err, req, res, next) => {
 
 // 404 handler
 app.use('*', (req, res) => {
-  res.status(404).json({ error: 'Route not found' });
+  res.status(404).json({ 
+    error: 'Route not found',
+    path: req.originalUrl,
+    method: req.method,
+    availableEndpoints: {
+      root: '/',
+      health: '/health',
+      api: '/api',
+      battle: '/api/battle',
+      player: '/api/player',
+      hashmon: '/api/hashmon',
+      blockchain: '/api/blockchain',
+      game: '/api/game',
+      nft: '/api/nft'
+    }
+  });
 });
 
 // Only start server if not in Vercel serverless environment
