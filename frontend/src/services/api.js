@@ -3,6 +3,13 @@ import axios from 'axios'
 // API base URL
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000/api'
 
+// Log API configuration for debugging
+console.log('🔧 API Configuration:', {
+  VITE_API_URL: import.meta.env.VITE_API_URL,
+  API_BASE_URL,
+  env: import.meta.env.MODE
+})
+
 // Create axios instance
 const api = axios.create({
   baseURL: API_BASE_URL,
@@ -33,13 +40,23 @@ api.interceptors.response.use(
     return response
   },
   (error) => {
+    console.error('❌ API Error:', {
+      message: error.message,
+      response: error.response?.data,
+      status: error.response?.status,
+      url: error.config?.url,
+      baseURL: error.config?.baseURL,
+      fullURL: error.config?.baseURL + error.config?.url
+    })
+    
     if (error.response) {
       // Server responded with error status
       const message = error.response.data?.error || error.response.data?.message || 'An error occurred'
       throw new Error(message)
     } else if (error.request) {
       // Request was made but no response received
-      throw new Error('Network error. Please check your connection.')
+      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:3000/api'
+      throw new Error(`Network error. Cannot reach backend at ${apiUrl}. Please check your connection and backend URL.`)
     } else {
       // Something else happened
       throw new Error(error.message || 'An unexpected error occurred')

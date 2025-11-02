@@ -60,7 +60,24 @@ const NFTMinting = ({ hashmon, onMintComplete, onClose, preCreatedVoucher = null
       setIsMinting(false); // Reset minting state so button shows
       // Don't auto-mint - show button for user to click
     } catch (error) {
-      const errorMsg = error.response?.data?.error || error.message || 'Failed to create mint voucher';
+      console.error('❌ Create mint voucher error:', error);
+      console.error('❌ Error details:', {
+        message: error.message,
+        response: error.response?.data,
+        status: error.response?.status,
+        request: error.request
+      });
+      
+      // Better error messages
+      let errorMsg = 'Failed to create mint voucher';
+      if (error.message?.includes('Network error') || error.message?.includes('Cannot reach backend')) {
+        errorMsg = `Backend API not accessible. Please check:\n1. Backend is deployed and running\n2. VITE_API_URL is set correctly\n3. Backend URL: ${import.meta.env.VITE_API_URL || 'Not set'}`;
+      } else if (error.response?.data?.error) {
+        errorMsg = error.response.data.error;
+      } else if (error.message) {
+        errorMsg = error.message;
+      }
+      
       setMintError(errorMsg);
       setIsMinting(false);
     }
