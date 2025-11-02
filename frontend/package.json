@@ -1,0 +1,52 @@
+{
+  "name": "hashmon-frontend",
+  "version": "1.0.0",
+  "description": "HashMon Frontend - Pokémon Mini-Game on Pharos Network",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
+    "test": "vitest"
+  },
+  "dependencies": {
+    "@privy-io/react-auth": "^3.3.0",
+    "@privy-io/wagmi": "^2.0.1",
+    "axios": "^1.6.0",
+    "ethers": "^6.8.0",
+    "framer-motion": "^10.16.5",
+    "lucide-react": "^0.294.0",
+    "phaser": "^3.70.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-hot-toast": "^2.4.1",
+    "react-query": "^3.39.3",
+    "react-router-dom": "^6.20.0",
+    "react-spring": "^9.7.3",
+    "styled-components": "^6.1.1",
+    "use-sound": "^4.0.1",
+    "zustand": "^4.4.7"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.37",
+    "@types/react-dom": "^18.2.15",
+    "@vitejs/plugin-react": "^4.1.1",
+    "eslint": "^8.53.0",
+    "eslint-plugin-react": "^7.33.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.4",
+    "vite": "^5.0.0",
+    "vitest": "^0.34.6"
+  },
+  "keywords": [
+    "hashmon",
+    "pokemon",
+    "game",
+    "react",
+    "phaser",
+    "blockchain"
+  ],
+  "author": "HashMon Team",
+  "license": "MIT"
+}

@@ -1,0 +1,46 @@
+{
+  "name": "hashmon-backend",
+  "version": "1.0.0",
+  "description": "HashMon Backend Server for Battle Validation and Voucher Signing",
+  "main": "server.js",
+  "scripts": {
+    "dev": "nodemon server.js",
+    "start": "node server.js",
+    "build": "echo 'No build step needed for Node.js'",
+    "test": "jest"
+  },
+  "dependencies": {
+    "@storacha/client": "^1.8.12",
+    "@supabase/supabase-js": "^2.38.4",
+    "axios": "^1.13.1",
+    "compression": "^1.7.4",
+    "cors": "^2.8.5",
+    "dotenv": "^16.6.1",
+    "ethers": "^6.8.0",
+    "express": "^4.18.2",
+    "express-rate-limit": "^7.1.5",
+    "files-from-path": "^1.1.4",
+    "form-data": "^4.0.4",
+    "helmet": "^7.1.0",
+    "joi": "^17.11.0",
+    "jsonwebtoken": "^9.0.2",
+    "jwks-client": "^2.1.0",
+    "mongodb": "^6.20.0",
+    "mongoose": "^8.19.1",
+    "multer": "^1.4.5-lts.1",
+    "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "nodemon": "^3.0.2"
+  },
+  "keywords": [
+    "hashmon",
+    "pokemon",
+    "backend",
+    "blockchain",
+    "pharos"
+  ],
+  "author": "HashMon Team",
+  "license": "MIT"
+}

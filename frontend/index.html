@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HashMon - Pokémon Mini-Game on Pharos Network</title>
+    <meta name="description" content="Battle, collect, and mint unique HashMon NFTs on the Pharos blockchain. Experience the future of gaming with Web3 technology." />
+    <meta name="keywords" content="pokemon, nft, game, blockchain, pharos, web3, crypto, gaming" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://hashmon-game.com/" />
+    <meta property="og:title" content="HashMon - Pokémon Mini-Game on Pharos Network" />
+    <meta property="og:description" content="Battle, collect, and mint unique HashMon NFTs on the Pharos blockchain." />
+    <meta property="og:image" content="https://hashmon-game.com/og-image.png" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://hashmon-game.com/" />
+    <meta property="twitter:title" content="HashMon - Pokémon Mini-Game on Pharos Network" />
+    <meta property="twitter:description" content="Battle, collect, and mint unique HashMon NFTs on the Pharos blockchain." />
+    <meta property="twitter:image" content="https://hashmon-game.com/og-image.png" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      
+      body {
+        font-family: 'Inter', sans-serif;
+        background: #000000;
+        overflow-x: hidden;
+      }
+      
+      #root {
+        min-height: 100vh;
+        width: 100%;
+      }
+      
+      /* Loading animation */
+      .loading-screen {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #000000;
+        display: none;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+        color: white;
+      }
+      
+      .loading-spinner {
+        width: 50px;
+        height: 50px;
+        border: 3px solid rgba(255, 255, 255, 0.3);
+        border-top: 3px solid white;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        margin-bottom: 20px;
+      }
+      
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+      
+      .loading-text {
+        font-size: 18px;
+        font-weight: 600;
+        margin-bottom: 10px;
+      }
+      
+      .loading-subtext {
+        font-size: 14px;
+        opacity: 0.8;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+    <script>
+      // Immediately ensure app is visible
+      (function() {
+        const root = document.getElementById('root');
+        if (root) {
+          root.style.opacity = '1';
+          root.style.visibility = 'visible';
+        }
+        
+        // Remove any loading screens
+        const loadingScreens = document.querySelectorAll('.loading-screen, #loading-screen');
+        loadingScreens.forEach(el => {
+          if (el) {
+            el.style.display = 'none';
+            el.remove();
+          }
+        });
+        
+        // Make sure body is visible
+        document.body.style.opacity = '1';
+        document.body.style.visibility = 'visible';
+      })();
+      
+      // Also run when DOM is ready
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', function() {
+          const loadingScreens = document.querySelectorAll('.loading-screen, #loading-screen');
+          loadingScreens.forEach(el => el && el.remove());
+        });
+      }
+    </script>
+  </body>
+</html>
+

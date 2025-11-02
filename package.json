@@ -1,0 +1,35 @@
+{
+  "name": "hashmon",
+  "version": "1.0.0",
+  "description": "Pharos-Aligned Pokémon Mini-Game",
+  "main": "index.js",
+  "scripts": {
+    "dev": "concurrently \"npm run dev:frontend\" \"npm run dev:backend\"",
+    "dev:frontend": "cd frontend && npm run dev",
+    "dev:backend": "cd backend && npm run dev",
+    "build": "npm run build:frontend && npm run build:backend",
+    "build:frontend": "cd frontend && npm run build",
+    "build:backend": "cd backend && npm run build",
+    "test": "npm run test:contracts",
+    "test:contracts": "cd contracts && npm test",
+    "deploy": "cd contracts && npm run deploy:pharos",
+    "compile": "cd contracts && npm run compile"
+  },
+  "keywords": [
+    "pokemon",
+    "nft",
+    "game",
+    "pharos",
+    "blockchain"
+  ],
+  "author": "HashMon Team",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.75.0",
+    "dotenv": "^17.2.3"
+  }
+}
+
