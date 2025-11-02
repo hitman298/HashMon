@@ -55,6 +55,20 @@ const limiter = rateLimit({
 app.use('/api/', limiter);
 
 // CORS configuration
+// In Vercel, allow the frontend URL from environment variable
+const vercelUrl = process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : null;
+const frontendUrl = process.env.FRONTEND_URL || vercelUrl;
+
+if (frontendUrl) {
+  allowedOrigins.add(frontendUrl);
+  // Also add without trailing slash
+  if (frontendUrl.endsWith('/')) {
+    allowedOrigins.add(frontendUrl.slice(0, -1));
+  } else {
+    allowedOrigins.add(`${frontendUrl}/`);
+  }
+}
+
 app.use(cors({
   origin: (origin, callback) => {
     if (!origin) {
@@ -64,7 +78,9 @@ app.use(cors({
     if (
       allowedOrigins.has(origin) ||
       /^http:\/\/localhost:\d+$/.test(origin) ||
-      /^http:\/\/127\.0\.0\.1:\d+$/.test(origin)
+      /^http:\/\/127\.0\.0\.1:\d+$/.test(origin) ||
+      /^https:\/\/.*\.vercel\.app$/.test(origin) ||
+      process.env.VERCEL === '1' // Allow all origins in Vercel production
     ) {
       return callback(null, true);
     }
@@ -119,16 +135,19 @@ app.use('*', (req, res) => {
   res.status(404).json({ error: 'Route not found' });
 });
 
-// Start server
-app.listen(PORT, () => {
-  console.log(`🚀 HashMon Backend Server running on port ${PORT}`);
-  console.log(`📊 Environment: ${process.env.NODE_ENV || 'development'}`);
-  console.log(`🔗 Health check: http://localhost:${PORT}/health`);
-  
-  if (process.env.NODE_ENV === 'development') {
-    console.log(`🎮 API endpoints: http://localhost:${PORT}/api/`);
-  }
-});
+// Only start server if not in Vercel serverless environment
+if (process.env.VERCEL !== '1') {
+  // Start server for local development
+  app.listen(PORT, () => {
+    console.log(`🚀 HashMon Backend Server running on port ${PORT}`);
+    console.log(`📊 Environment: ${process.env.NODE_ENV || 'development'}`);
+    console.log(`🔗 Health check: http://localhost:${PORT}/health`);
+    
+    if (process.env.NODE_ENV === 'development') {
+      console.log(`🎮 API endpoints: http://localhost:${PORT}/api/`);
+    }
+  });
+}
 
 module.exports = app;
 

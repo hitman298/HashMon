@@ -183,6 +183,15 @@ HashMon showcases Pharos Network's high TPS capabilities through:
 
 ## 🚀 Deployment
 
+### Vercel Deployment (Recommended)
+
+We provide detailed guides for deploying to Vercel:
+
+- **Quick Start**: See [QUICK_DEPLOY.md](./QUICK_DEPLOY.md) for fastest deployment
+- **Full Guide**: See [VERCEL_DEPLOYMENT.md](./VERCEL_DEPLOYMENT.md) for complete instructions
+
+**Recommended Approach**: Deploy frontend and backend as separate Vercel projects for better isolation and scaling.
+
 ### Production Deployment
 
 1. **Deploy Smart Contracts**
@@ -192,12 +201,14 @@ HashMon showcases Pharos Network's high TPS capabilities through:
    ```
 
 2. **Deploy Backend**
-   - Use services like Render, Railway, or AWS
+   - Use Vercel (see deployment guides above)
+   - Or use services like Render, Railway, or AWS
    - Set environment variables
    - Ensure Supabase is configured
 
 3. **Deploy Frontend**
-   - Use Vercel, Netlify, or similar
+   - Use Vercel (see deployment guides above)
+   - Or use Netlify or similar
    - Set environment variables
    - Update API URLs
 
