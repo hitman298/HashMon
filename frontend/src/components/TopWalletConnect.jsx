@@ -26,8 +26,13 @@ const TopWalletConnect = () => {
   const handlePrivyLogin = async () => {
     try {
       setError(null)
-      await login()
+      console.log('🔍 Attempting Privy login...')
+      console.log('🔍 Privy ready state:', { authenticated, user })
+      
+      const result = await login()
+      console.log('✅ Login result:', result)
     } catch (err) {
+      console.error('❌ Login error:', err)
       setError('Login failed: ' + (err.message || 'Unknown error'))
     }
   }

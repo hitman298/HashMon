@@ -9,6 +9,17 @@ const WalletConnect = () => {
     return `${address.slice(0, 6)}...${address.slice(-4)}`
   }
 
+  const handleLogin = async () => {
+    try {
+      console.log('🔍 WalletConnect: Attempting login...')
+      await login()
+      console.log('✅ WalletConnect: Login successful')
+    } catch (error) {
+      console.error('❌ WalletConnect: Login failed', error)
+      alert('Failed to connect wallet: ' + error.message)
+    }
+  }
+
   if (!ready) {
     return (
       <div className="card" style={{ maxWidth: '300px', margin: '0 auto' }}>
@@ -37,7 +48,7 @@ const WalletConnect = () => {
       <p>Connect your wallet to start playing HashMon!</p>
       <button 
         className="btn btn-primary" 
-        onClick={login}
+        onClick={handleLogin}
       >
         Connect Wallet
       </button>

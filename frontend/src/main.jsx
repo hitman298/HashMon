@@ -111,11 +111,31 @@ if (!rootElement) {
     setTimeout(() => {
       console.log('🔍 Step 2: Rendering full app with Privy...')
       try {
+        // Get Privy App ID from environment or use default
+        const privyAppId = import.meta.env.VITE_PRIVY_APP_ID || 'cmgn86sbf004wi90dqvbqfrs8';
+        
+        console.log('🔍 Privy App ID:', privyAppId);
+        console.log('🔍 Environment variables:', {
+          VITE_API_URL: import.meta.env.VITE_API_URL,
+          VITE_PHAROS_CHAIN_ID: import.meta.env.VITE_PHAROS_CHAIN_ID,
+          VITE_PHAROS_RPC_URL: import.meta.env.VITE_PHAROS_RPC_URL,
+        });
+        
         root.render(
           <React.StrictMode>
             <ErrorBoundary>
               <PrivyProvider
-                appId="cmgn86sbf004wi90dqvbqfrs8"
+                appId={privyAppId}
+                config={{
+                  loginMethods: ['wallet', 'email', 'sms'],
+                  appearance: {
+                    theme: 'dark',
+                    accentColor: '#4f46e5',
+                  },
+                  embeddedWallets: {
+                    createOnLogin: 'users-without-wallets',
+                  },
+                }}
               >
                 <App />
               </PrivyProvider>
