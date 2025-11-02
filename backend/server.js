@@ -40,6 +40,7 @@ const envOrigins = (process.env.FRONTEND_URL || '')
 const allowedOrigins = new Set([...defaultAllowedOrigins, ...envOrigins]);
 
 const app = express();
+// Render uses PORT environment variable, default to 3000 for local development
 const PORT = process.env.PORT || 3000;
 
 // Security middleware
